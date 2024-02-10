@@ -1,8 +1,8 @@
 function themeToggle() {
   var toggleEl = document.querySelector("[data-toggle-theme]");
-  var dataKey = toggleEl ? toggleEl.getAttribute('data-key') : null;
-  (function (theme = localStorage.getItem(dataKey ? dataKey : "theme")) {
-    if (localStorage.getItem(dataKey ? dataKey : "theme")) {
+  const dataKey = toggleEl ? toggleEl.getAttribute('data-key') : "theme";
+  (function (theme = localStorage.getItem(dataKey)) {
+    if (localStorage.getItem(dataKey)) {
       document.documentElement.setAttribute("data-theme", theme);
       if (toggleEl) {
         [...document.querySelectorAll("[data-toggle-theme]")].forEach((el) => {
@@ -20,14 +20,14 @@ function themeToggle() {
           if (document.documentElement.getAttribute('data-theme') == themesArray[0]) {
             if (themesArray.length == 1) {
               document.documentElement.removeAttribute("data-theme");
-              localStorage.removeItem(dataKey ? dataKey : "theme");
+              localStorage.removeItem(dataKey);
             }else{
               document.documentElement.setAttribute("data-theme", themesArray[1]);
-              localStorage.setItem(dataKey ? dataKey : "theme", themesArray[1]);
+              localStorage.setItem(dataKey, themesArray[1]);
             }
           } else {
             document.documentElement.setAttribute("data-theme", themesArray[0]);
-            localStorage.setItem(dataKey ? dataKey : "theme", themesArray[0]);
+            localStorage.setItem(dataKey, themesArray[0]);
           }
         }
         [...document.querySelectorAll("[data-toggle-theme]")].forEach((el) => {
